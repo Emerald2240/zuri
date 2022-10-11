@@ -47,8 +47,8 @@
             <!-- <label for="mgender">
                 Gender
             </label> -->
-            Male:<input type="checkbox" name="mgender" value="Male">
-            Female:<input type="checkbox" name="fgender" value="Female">
+            Male:<input type="checkbox" name="gender" value="Male">
+            Female:<input type="checkbox" name="gender" value="Female">
 
         </div>
 
