@@ -6,7 +6,7 @@ if (!empty($_POST)) {
     // Checks if userdata.csv already exists. If it doesnt exist, the first row of the csv file is created.
     if (!file_exists('userdata.csv')) {
         $fp = fopen('userdata.csv', 'a');
-        fwrite($fp, 'Name,Email,Date_Of_Birth,Gender,Country,' . "\n");
+        fwrite($fp, 'Name,Email,Date_Of_Birth,Gender,Country' . "\n");
         echo 'New File Created<br>';
     } else {
         $fp = fopen('userdata.csv', 'a');
@@ -18,7 +18,7 @@ if (!empty($_POST)) {
     fwrite($fp, $_POST['email'] . ',');
     fwrite($fp, $_POST['dateOfBirth'] . ',');
     fwrite($fp, $_POST['gender'] . ',');
-    fwrite($fp, $_POST['country'] . ',' . "\n");
+    fwrite($fp, $_POST['country'] .  "\n");
     #endregion
 
     fclose($fp);
