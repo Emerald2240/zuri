@@ -1,10 +1,20 @@
 <?php
-function logout(){
-    /*
-Check if the existing user has a session
-if it does
-destroy the session and redirect to login page
-*/
+session_start();
+logout();
+
+function logout()
+{
+    if (isset($_SESSION['username'])) {
+        session_destroy();
+        gotoPage('../forms/login.html');
+    } else {
+        gotoPage('../forms/login.html');
+    }
 }
 
-echo "HANDLE THIS PAGE";
+//redirects to new page
+function gotoPage($location)
+{
+    header('location:' . $location);
+    exit();
+}

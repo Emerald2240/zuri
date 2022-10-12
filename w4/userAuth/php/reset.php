@@ -3,6 +3,7 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $newpassword = $_POST['newpassword'];
 
+    //if password is reset succesfully, display successful message, if not display unsuccesful message
     if (resetPassword($email, $newpassword)) {
         echo 'User succesfully updated';
         // gotoPage('../forms/login.html');
@@ -16,23 +17,26 @@ if (isset($_POST['submit'])) {
 
 function resetPassword($email, $newpassword)
 {
-    //open file and check if the username exist inside
-    //if it does, replace the password
 
     $changes = false;
     $filename = '../storage/users.csv';
     $data = [];
 
+    if (!file_exists('../storage/users.csv')) {
+        die('Oops! File not available. Go register.');
+    }
+
     // open the file
     $f = fopen($filename, 'r');
 
+    //variable to temporarily hold csv data
     $data = [];
 
     if ($f === false) {
         die('Cannot open the file ' . $filename);
     }
 
-    // read each line in CSV file at a time
+    // read each line in CSV file at a time and compare email. if match found, make required changes
     while (($row = fgetcsv($f)) !== false) {
         // print_r($row);
         if ($row[1] == $email) {
@@ -42,9 +46,11 @@ function resetPassword($email, $newpassword)
         $data[] = $row;
     }
 
-    //print_r($data);
+    echo '<pre>';
+    print_r($data);
 
-    if ($changes == false) {
+    //if no changes, do nothing, if there are, rebuild csv file
+    if (!$changes) {
         return false;
     } else {
         $fwrite = fopen($filename, 'w');
@@ -60,9 +66,9 @@ function resetPassword($email, $newpassword)
     return false;
 }
 
+//redirects user to another page
 function gotoPage($location)
 {
     header('location:' . $location);
     exit();
 }
-// echo "HANDLE THIS PAGE";
