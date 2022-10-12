@@ -9,6 +9,7 @@ if(isset($_POST['submit'])){
 function resetPassword($email, $password){
     //open file and check if the username exist inside
     //if it does, replace the password
+
 }
 echo "HANDLE THIS PAGE";
 
